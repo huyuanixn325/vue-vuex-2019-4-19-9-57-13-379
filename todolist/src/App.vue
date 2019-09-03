@@ -1,16 +1,18 @@
 <template>
   <div id="app">
     <CreateForm @addTodo="addTodoLists"></CreateForm>
+    <TodoListForm :filterTodoList="todoList"></TodoListForm>
   </div>
 </template>
 
 <script>
 import CreateForm from './components/createForm.vue'
-
+import TodoListForm from './components/todoListForm.vue'
 export default {
   name: 'app',
   components: {
-    CreateForm
+    CreateForm,
+    TodoListForm
   },
   data: function () {
             return {
