@@ -17,24 +17,12 @@
       TodoListForm,
       FilterForm
     },
-    data: function () {
-              return {
-                  /**
-                   * 定义了 todo item 中属性为 {content:'吃饭',status:'active'}
-                   * 定义了 todo 的两种状态 completed、active，默认为 active
-                   */
-                  inputtingText:'',
-                  todoList: [
-                              {content:"吃饭",status:'active',checkd:false},
-                              {content:"购物",status:'completed',checkd:true}
-                              ],
-                  currentFilter: 'completed'
-              }
-          },computed:{
+    
+      computed:{
             filterTodoList:function(){
                   let filterTodoList = [];
-                  this.todoList.forEach(element => {
-                      if(element.status === this.currentFilter || this.currentFilter === 'all'){
+                  this.$store.state.todoList.forEach(element => {
+                      if(element.status === this.$store.state.currentFilter ||this.$store.state.currentFilter === 'all'){
                           filterTodoList.push(element);
                       }
                   });
@@ -43,18 +31,18 @@
           },
             methods:{
               addTodoLists:function(inputtingText){
-                  console.log("31",this.todoList);
-                  this.todoList.push({
+                 // console.log("31",this.todoList);
+                  this.$store.state.todoList.push({
                       content:inputtingText,
                       status:'active',
                       checkd:false
                   }); 
               },
                 handleStatus:function(status){
-                    this.currentFilter=status;
+                    this.$store.state.currentFilter=status;
                 },
                 updateTodoList:function(todo){
-                  this.todoList.forEach(Element=>{
+                 this.$store.state.todoList.forEach(Element=>{
                     if(Element.content==todo.content){
                       Element.status=todo.status;
                     }

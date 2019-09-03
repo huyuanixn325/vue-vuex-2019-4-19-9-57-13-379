@@ -7,18 +7,18 @@
 <script>
     export default {
         name:'create-form',
-        data:function(){
-            return{
-                inputtingText:"" 
+        computed:{
+            inputtingText:function(){
+                return this.$store.state.inputtingText;
             }
         },
         methods:{
             handleTodo:function(){
-                this.$emit("addTodo",this.inputtingText);
+                this.$emit("addTodo",this.$store.state.inputtingText);
             },
             handleChange:function(event){
                 console.log(event);
-                this.inputtingText = event.target.value;
+                this.$store.state.inputtingText = event.target.value;
             }
         }
     }
