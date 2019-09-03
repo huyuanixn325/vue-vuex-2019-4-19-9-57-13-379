@@ -3,7 +3,7 @@
             <ul>
                 <li v-for="(todo,index) in filterTodoList" :key="index">
                   <input type="checkbox" id="index" v-model="todo.checkd" @change="changeTodoStatus(todo)">
-                  <span v-if="todo.checkd "class='checked'>{{todo.content}}</span>
+                  <span v-if="todo.checkd" class='checked'>{{todo.content}}</span>
                   <span v-else>{{todo.content}}</span>
                 </li>
             </ul>
@@ -38,6 +38,7 @@
     }
 
     .checked{
-  text-decoration:line-through;
-}
+    text-decoration:line-through;
+    }
+    
 </style>
