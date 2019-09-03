@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <CreateForm @addTodo="addTodoLists"></CreateForm>
-    <TodoListForm :filterTodoList="filterTodoList"></TodoListForm>
+    <TodoListForm :filterTodoList="filterTodoList" @changeTodoStatus="updateTodoList"></TodoListForm>
     <FilterForm @changeStatus="handleStatus"></FilterForm>
   </div>
 </template>
@@ -25,8 +25,8 @@
                    */
                   inputtingText:'',
                   todoList: [
-                              {content:"吃饭",status:'active'},
-                              {content:"购物",status:'completed'}
+                              {content:"吃饭",status:'active',checkd:false},
+                              {content:"购物",status:'completed',checkd:true}
                               ],
                   currentFilter: 'completed'
               }
@@ -46,12 +46,20 @@
                   console.log("31",this.todoList);
                   this.todoList.push({
                       content:inputtingText,
-                      status:'active'
+                      status:'active',
+                      checkd:false
                   }); 
               },
                 handleStatus:function(status){
                     this.currentFilter=status;
-                  } 
+                },
+                updateTodoList:function(todo){
+                  this.todoList.forEach(Element=>{
+                    if(Element.content==todo.content){
+                      Element.status=todo.status;
+                    }
+                  })
+                } 
           }
   }
 </script>
