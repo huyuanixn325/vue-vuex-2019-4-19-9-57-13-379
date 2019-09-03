@@ -14,7 +14,7 @@
         },
         methods:{
             handleTodo:function(){
-                this.$emit("addTodo",this.$store.state.inputtingText);
+                this.$store.commit("addTodoLists",this.$store.state.inputtingText);
             },
             handleChange:function(event){
                 console.log(event);

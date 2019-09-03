@@ -11,10 +11,12 @@
 </template>
 <script>
     export default {
-        name:'filterForm'
-        ,props:{
-            filterTodoList:Array
-            },
+        name:'filterForm',
+        computed:{
+            filterTodoList:function(){
+               return this.$store.getters.filterTodoList;
+         }   
+        },
         methods:{
           changeTodoStatus:function(todo){
               if(!todo.checked){
@@ -24,8 +26,9 @@
               else{ 
                   todo.status='active';
                   todo.checked=false;
-                  };
-              this.$emit("changeTodoStatus",todo);
+                  }
+              this.$store.commit("updateTodoList",todo);
+             
           }  
         }
     }

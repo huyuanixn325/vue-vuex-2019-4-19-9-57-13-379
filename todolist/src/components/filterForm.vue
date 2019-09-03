@@ -15,7 +15,7 @@ export default {
     },
     methods:{
         handleStatus:function(status){
-            this.$emit("changeStatus",status);
+            this.$store.commit("handleStatus",status);
             this.actived = status;
         }
     }    
