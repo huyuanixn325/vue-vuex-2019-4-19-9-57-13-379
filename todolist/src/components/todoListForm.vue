@@ -8,10 +8,17 @@
         </div> 
 </template>
 <script>
-export default {
-    name:'filterForm'
-    ,props:{
-        filterTodoList:Array
-        }
-}
+    export default {
+        name:'filterForm'
+        ,props:{
+            filterTodoList:Array
+            }
+    }
 </script>
+<style>
+  ul{
+        margin:0 auto;
+        display:block;
+        padding:0px;
+    }
+</style>

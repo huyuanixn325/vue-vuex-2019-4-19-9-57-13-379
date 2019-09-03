@@ -1,43 +1,59 @@
 <template>
   <div id="app">
     <CreateForm @addTodo="addTodoLists"></CreateForm>
-    <TodoListForm :filterTodoList="todoList"></TodoListForm>
+    <TodoListForm :filterTodoList="filterTodoList"></TodoListForm>
+    <FilterForm @changeStatus="handleStatus"></FilterForm>
   </div>
 </template>
 
 <script>
-import CreateForm from './components/createForm.vue'
-import TodoListForm from './components/todoListForm.vue'
-export default {
-  name: 'app',
-  components: {
-    CreateForm,
-    TodoListForm
-  },
-  data: function () {
-            return {
-                /**
-                 * 定义了 todo item 中属性为 {content:'吃饭',status:'active'}
-                 * 定义了 todo 的两种状态 completed、active，默认为 active
-                 */
-                inputtingText:'',
-                todoList: [
-                            {content:"吃饭",status:'active'},
-                            {content:"购物",status:'completed'}
-                            ],
-                currentFilter: 'completed'
-            }
-        },
-          methods:{
-            addTodoLists:function(inputtingText){
-                console.log("31",this.todoList);
-                this.todoList.push({
-                    content:inputtingText,
-                    status:'active'
-                });  
-            }
-        }
-}
+  import CreateForm from './components/createForm.vue'
+  import TodoListForm from './components/todoListForm.vue'
+  import FilterForm from './components/filterForm.vue'
+  export default {
+    name: 'app',
+    components: {
+      CreateForm,
+      TodoListForm,
+      FilterForm
+    },
+    data: function () {
+              return {
+                  /**
+                   * 定义了 todo item 中属性为 {content:'吃饭',status:'active'}
+                   * 定义了 todo 的两种状态 completed、active，默认为 active
+                   */
+                  inputtingText:'',
+                  todoList: [
+                              {content:"吃饭",status:'active'},
+                              {content:"购物",status:'completed'}
+                              ],
+                  currentFilter: 'completed'
+              }
+          },computed:{
+            filterTodoList:function(){
+                  let filterTodoList = [];
+                  this.todoList.forEach(element => {
+                      if(element.status === this.currentFilter || this.currentFilter === 'all'){
+                          filterTodoList.push(element);
+                      }
+                  });
+                  return filterTodoList;
+              }
+          },
+            methods:{
+              addTodoLists:function(inputtingText){
+                  console.log("31",this.todoList);
+                  this.todoList.push({
+                      content:inputtingText,
+                      status:'active'
+                  }); 
+              },
+                handleStatus:function(status){
+                    this.currentFilter=status;
+                  } 
+          }
+  }
 </script>
 
 <style>
